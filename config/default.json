@@ -1,0 +1,11 @@
+{
+  "mongoDB": {
+    "MONGO_URI": "mongodb://127.0.0.1/BizCardsAPI"
+  },
+  "server": {
+    "PORT": 3000
+  },
+  "auth": {
+    "JWT_SECRET": "JWT enviroment variable is empty"
+  }
+}

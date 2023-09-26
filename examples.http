@@ -1,0 +1,192 @@
+@local=http://localhost:3000
+
+@bizToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTBiMjI5OWE4YzhjNzhiYmFjNTExMDciLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjk1MjMxNDI3fQ.IqArXSezDA6-iQNsarCGhiuXdgh_2hONykDnLwZtTvo
+@regularToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTBiMjI5OGE4YzhjNzhiYmFjNTExMDMiLCJpc0J1c2luZXNzIjpmYWxzZSwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY5NTIyOTU2NH0.iB9pYpg2tVLebYlLv0zwv_YXlPVrEqftPP63Fip9UjA
+@adminToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTBiMjI5OGE4YzhjNzhiYmFjNTExMDUiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2OTUyMjkwNjR9.44Q18_Y0kNR0n0Y9E-seNdhBgnOe05TZ_t4bG4_8EZU
+
+
+### Users Route
+
+### Create new user
+POST {{local}}/users
+Content-Type: application/json
+
+{
+    "name":{
+        "first":"Ayala",
+        "last":"Shulamn"
+    },
+    "phone":"0526094760",
+    "email":"d@d7.ayala",
+    "password":"123456",
+    "isBusiness":false,
+    "address":{
+        "state":"",
+        "country":"Israel",
+        "city":"petach- tikva",
+        "street":"Gronboim",
+        "houseNumber":"30A"
+    }
+}
+
+### Authenticate (login) / Sign in
+POST {{local}}/users/login
+Content-Type: application/json
+
+{
+     "email": "jane_doe@gmail.com",
+    "password": "Aa123456&"
+}
+
+
+### Get all users
+GET {{local}}/users/
+x-auth-token: {{adminToken}}
+
+
+### Get user by ID
+GET {{local}}/users/650b2299a8c8c78bbac51107
+x-auth-token: {{adminToken}}
+
+
+### Edit user
+PUT {{local}}/users/650b2298a8c8c78bbac51105
+Content-Type: application/json
+x-auth-token: {{adminToken}}
+
+{
+    "name":{
+        "first":"Lior",
+        "last":"Tahulian"
+    },
+    "phone":"0526094760",
+    "email":"ben@ben.net",
+    "password":"123456",
+    "isBusiness":true,
+    "address":{
+        "state":"",
+        "country":"Israel",
+        "city":"Netanya",
+        "street":"Greenboim",
+        "houseNumber":"30A"
+    }
+}
+
+
+### Change isBusiness status
+PATCH {{local}}/users/650b2298a8c8c78bbac51103
+Content-Type: application/json
+x-auth-token: {{regularToken}}
+
+{
+"isBusiness":true
+}
+
+### Delete user
+DELETE {{local}}/users/650b2298a8c8c78bbac51103
+x-auth-token: {{regularToken}}
+
+
+### Static check
+GET {{local}}/hello.html
+
+
+##############################################################################################################################################################################################################################
+
+
+### Cards Route
+
+
+### Create new card
+POST {{local}}/cards
+Content-Type: application/json
+x-auth-token: {{adminToken}}
+
+{
+
+    "title":"Ayalas card",
+     "subtitle":"best card ever",
+     "description":"best card ever",
+    "phone":"0526094760",
+    "email":"d@d7.ben",
+    "web":"ayalaweb.com",
+    "image":{"url":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+    "alt":"blank-profile-picture"},
+    "address":{
+        "state":"",
+        "country":"Israel",
+        "city":"Netanya",
+        "street":"Gronboim",
+        "houseNumber":"30A"
+    }
+}
+
+
+### Cards Route
+
+
+### Get all cards
+GET {{local}}/cards
+
+
+### Get my cards
+GET {{local}}/cards/my-cards
+x-auth-token: {{bizToken}}
+
+
+### Get card by ID
+GET {{local}}/cards/650b2299a8c8c78bbac5110a
+
+
+### Create new card
+POST {{local}}/cards
+Content-Type: application/json
+x-auth-token: {{bizToken}}
+
+{
+    "title":"My Card Title",
+    "subtitle":"My Card subTitle",
+    "description":"My Card description",
+    "phone":"0526094760",
+    "email":"d@d.ben",
+    "web":"myCards.web",
+    "address":{
+        "state":"",
+        "country":"Israel",
+        "city":"Netanya",
+        "street":"Gronboim",
+        "houseNumber":"30A"
+    }
+}
+
+
+### Edit card
+PUT {{local}}/cards/650b2299a8c8c78bbac5110a
+Content-Type: application/json
+x-auth-token: {{bizToken}}
+
+{
+    "title":"Editted Card Title",
+    "subtitle":"Myyyyyyy Editted Card subTitle",
+    "description":"Myyyyyyyyyyy Card description",
+    "phone":"0526094760",
+    "email":"d@d7.ben",
+    "web":"myCards.web",
+    "address":{
+        "state":"",
+        "country":"Israel",
+        "city":"Netanya",
+        "street":"Gronboim",
+        "houseNumber":"30A"
+    }
+}
+
+
+### Like card
+PATCH {{local}}/cards/650b2299a8c8c78bbac5110a
+x-auth-token: {{bizToken}}
+
+
+### Delete card
+DELETE {{local}}/cards/650b2299a8c8c78bbac5110d
+x-auth-token: {{adminToken}}
